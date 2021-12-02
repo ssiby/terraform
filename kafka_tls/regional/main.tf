@@ -84,7 +84,7 @@ data "terraform_remote_state" "msk_subordinate_ca" {
 #
 
 module "msk_names" {
-  source      = "git::ssh://git@git.manomano.tech/sre/terraform-modules/naming.git?ref=v2.0.0"
+  source      = "git::ssh://git@github.com:ssiby/terraform-module/naming.git?ref=master"
   region      = var.aws_region
   environment = var.environment
   type        = var.type
@@ -98,7 +98,7 @@ module "msk_names" {
 # Cluster
 #
 module "msk" {
-  source = "git::ssh://git@git.manomano.tech/sre/terraform-modules/msk_cluster.git?ref=v2.0.3"
+  source = "git::ssh://git@github.com:ssiby/terraform-module/msk_cluster.git?ref=v2.0.3"
   names  = module.msk_names.names
 
   kafka_version           = var.kafka_version
@@ -117,7 +117,7 @@ module "msk" {
 }
 
 module "tools_in" {
-  source = "git::ssh://git@git.manomano.tech/sre/terraform-modules/security_sg_rule_cidr?ref=v2.0.0"
+  source = "git::ssh://git@github.com:ssiby/terraform-module/security_sg_rule_cidr?ref=v2.0.0"
 
   type              = "ingress"
   from_port         = "8081"
